@@ -10,6 +10,7 @@ import { Heading } from "@/components/heading";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
+import { Empty } from "@/components/empty";
 
 import { formSchema } from "./constants";
 import { useRouter } from "next/navigation";
@@ -95,6 +96,9 @@ const ConversationPage = () => {
           </form>
         </Form>
         <div className="space-y-4 mt-4">
+          {messages.length === 0 && !isLoading && (
+            <Empty label="No conversation started." />
+          )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
               <div key={message.content}>{message.content}</div>
