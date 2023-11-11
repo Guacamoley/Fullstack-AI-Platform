@@ -2,27 +2,26 @@
 
 import axios from "axios";
 import * as z from "zod";
-import { Code } from "lucide-react";
+import { ImageIcon, MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import { useState } from "react";
-import OpenAI from "openai";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Heading } from "@/components/heading";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { EmptyCode } from "@/components/empty";
+import { EmptyImage } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
-import { cn } from "@/lib/utils";
 
 import { formSchema } from "./constants";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import OpenAI from "openai";
+import { cn } from "@/lib/utils";
 
-const CodePage = () => {
+const ImagePage = () => {
   const router = useRouter();
   const [messages, setMessages] = useState<
     OpenAI.Chat.Completions.ChatCompletionMessageParam[]
@@ -45,7 +44,7 @@ const CodePage = () => {
       };
       const newMessages = [...messages, userMessage];
 
-      const response = await axios.post("/api/code", {
+      const response = await axios.post("/api/conversation", {
         messages: newMessages,
       });
 
@@ -62,12 +61,11 @@ const CodePage = () => {
   return (
     <div>
       <Heading
-        title="Code Generation"
-        description="
-        Generate code based on a clear and detailed textual description of its functionality and design."
-        icon={Code}
-        iconColor="text-green-700"
-        bgColor="bg-green-700/10"
+        title="Image Generation"
+        description="Transform your prompt into a visual representation."
+        icon={ImageIcon}
+        iconColor="text-pink-700"
+        bgColor="bg-pink-700/10"
       />
       <div className="px-4 lg:px-8">
         <Form {...form}>
@@ -85,7 +83,7 @@ const CodePage = () => {
                       className="border-0 outline-none focus-visible:ring-0 
                     focus-visible:ring-transparent"
                       disabled={isLoading}
-                      placeholder="Implement a function in Python that takes a list of integers as input and returns the sum of all even numbers in the list."
+                      placeholder="Ask me anything! What's on your mind today?"
                       {...field}
                     />
                   </FormControl>
@@ -107,7 +105,7 @@ const CodePage = () => {
             </div>
           )}
           {messages.length === 0 && !isLoading && (
-            <EmptyCode label="No code has been generated." />
+            <EmptyImage label="No image generated." />
           )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
@@ -121,21 +119,7 @@ const CodePage = () => {
                 )}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                <ReactMarkdown
-                  components={{
-                    pre: ({ node, ...props }) => (
-                      <div className="overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg">
-                        <pre {...props} />
-                      </div>
-                    ),
-                    code: ({ node, ...props }) => (
-                      <code className="bg-black/10 rounded-lg p-1" {...props} />
-                    ),
-                  }}
-                  className="text-sm overflow-hidden leading-7"
-                >
-                  {message.content || ""}
-                </ReactMarkdown>
+                <p className="text-sm">{message.content}</p>
               </div>
             ))}
           </div>
@@ -145,4 +129,4 @@ const CodePage = () => {
   );
 };
 
-export default CodePage;
+export default ImagePage;
