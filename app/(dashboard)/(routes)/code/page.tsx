@@ -14,7 +14,7 @@ import { Heading } from "@/components/heading";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Empty } from "@/components/empty";
+import { EmptyCode } from "@/components/code-empty";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
@@ -107,7 +107,7 @@ const CodePage = () => {
             </div>
           )}
           {messages.length === 0 && !isLoading && (
-            <Empty label="No conversation started." />
+            <EmptyCode label="No code has been generated." />
           )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
