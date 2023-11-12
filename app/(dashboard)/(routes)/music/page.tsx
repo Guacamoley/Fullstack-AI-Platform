@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import * as z from "zod";
-import { MessageSquare } from "lucide-react";
+import { Music } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -10,7 +10,7 @@ import { Heading } from "@/components/heading";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Empty } from "@/components/empty";
+import { EmptyMusic } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
@@ -62,11 +62,11 @@ const ConversationPage = () => {
   return (
     <div>
       <Heading
-        title="Conversation"
-        description="The pinnacle of our sophisticated conversational model."
-        icon={MessageSquare}
-        iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        title="Music Generation"
+        description="Transform your prompt into a musical composition."
+        icon={Music}
+        iconColor="text-emerald-500"
+        bgColor="bg-emerald-500/10"
       />
       <div className="px-4 lg:px-8">
         <Form {...form}>
@@ -84,7 +84,7 @@ const ConversationPage = () => {
                       className="border-0 outline-none focus-visible:ring-0 
                     focus-visible:ring-transparent"
                       disabled={isLoading}
-                      placeholder="Ask me anything! What's on your mind today?"
+                      placeholder="Upbeat Brazilian funk"
                       {...field}
                     />
                   </FormControl>
@@ -106,7 +106,7 @@ const ConversationPage = () => {
             </div>
           )}
           {messages.length === 0 && !isLoading && (
-            <Empty label="No conversation started." />
+            <EmptyMusic label="No conversation started." />
           )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
