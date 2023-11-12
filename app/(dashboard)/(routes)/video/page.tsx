@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import * as z from "zod";
-import { Music } from "lucide-react";
+import { VideoIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -10,15 +10,14 @@ import { Heading } from "@/components/heading";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { EmptyMusic } from "@/components/empty";
+import { EmptyVideo } from "@/components/empty";
 import { Loader } from "@/components/loader";
 
 import { formSchema } from "./constants";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import OpenAI from "openai";
 
-const MusicPage = () => {
+const VideoPage = () => {
   const router = useRouter();
   const [music, setMusic] = useState<string>();
 
@@ -50,11 +49,11 @@ const MusicPage = () => {
   return (
     <div>
       <Heading
-        title="Music Generation"
-        description="Transform your prompt into a musical composition."
-        icon={Music}
-        iconColor="text-emerald-500"
-        bgColor="bg-emerald-500/10"
+        title="Video Generation"
+        description="Convert your prompt into a visual video representation."
+        icon={VideoIcon}
+        iconColor="text-orange-700"
+        bgColor="bg-orange-700/10"
       />
       <div className="px-4 lg:px-8">
         <Form {...form}>
@@ -72,7 +71,7 @@ const MusicPage = () => {
                       className="border-0 outline-none focus-visible:ring-0 
                     focus-visible:ring-transparent"
                       disabled={isLoading}
-                      placeholder="Upbeat Brazilian funk"
+                      placeholder="Dog playing fetch at the park"
                       {...field}
                     />
                   </FormControl>
@@ -93,7 +92,7 @@ const MusicPage = () => {
               <Loader />
             </div>
           )}
-          {!music && !isLoading && <EmptyMusic label="No music generated." />}
+          {!music && !isLoading && <EmptyVideo label="No video generated." />}
           {music && (
             <audio controls className="w-full mt-8">
               <source src={music} />
@@ -105,4 +104,4 @@ const MusicPage = () => {
   );
 };
 
-export default MusicPage;
+export default VideoPage;

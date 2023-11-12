@@ -16,7 +16,6 @@ import { Loader } from "@/components/loader";
 import { formSchema } from "./constants";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import OpenAI from "openai";
 
 const MusicPage = () => {
   const router = useRouter();
