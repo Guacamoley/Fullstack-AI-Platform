@@ -42,7 +42,7 @@ const MusicPage = () => {
       console.log(error);
       // TODO: Open Pro Model
     } finally {
-      router.refresh;
+      router.refresh();
     }
   };
 

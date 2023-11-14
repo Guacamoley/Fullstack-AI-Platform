@@ -19,7 +19,6 @@ import { formSchema } from "./constants";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import OpenAI from "openai";
-import { ChatCompletionMessage } from "openai/resources/chat/index.mjs";
 import { cn } from "@/lib/utils";
 
 const ConversationPage = () => {
@@ -55,7 +54,7 @@ const ConversationPage = () => {
       console.log(error);
       // TODO: Open Pro Model
     } finally {
-      router.refresh;
+      router.refresh();
     }
   };
 
