@@ -27,8 +27,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import OpenAI from "openai";
 import { cn } from "@/lib/utils";
+import { useProModel } from "@/hooks/use-pro-model";
 
 const PhotoPage = () => {
+  const proModel = useProModel();
   const router = useRouter();
   const [photos, setPhotos] = useState<string[]>([]);
 
@@ -54,7 +56,9 @@ const PhotoPage = () => {
       setPhotos(urls);
     } catch (error: any) {
       console.log(error);
-      // TODO: Open Pro Model
+      if (error?.response?.status === 403) {
+        proModel.onOpen();
+      }
     } finally {
       router.refresh();
     }

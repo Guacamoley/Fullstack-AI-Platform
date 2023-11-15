@@ -21,8 +21,10 @@ import { BotAvatar } from "@/components/bot-avatar";
 import { cn } from "@/lib/utils";
 
 import { formSchema } from "./constants";
+import { useProModel } from "@/hooks/use-pro-model";
 
 const CodePage = () => {
+  const proModel = useProModel();
   const router = useRouter();
   const [messages, setMessages] = useState<
     OpenAI.Chat.Completions.ChatCompletionMessageParam[]
@@ -52,8 +54,9 @@ const CodePage = () => {
       setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
     } catch (error: any) {
-      console.log(error);
-      // TODO: Open Pro Model
+      if (error?.response?.status === 403) {
+        proModel.onOpen();
+      }
     } finally {
       router.refresh();
     }

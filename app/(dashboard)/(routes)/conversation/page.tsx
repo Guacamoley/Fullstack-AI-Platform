@@ -20,8 +20,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import OpenAI from "openai";
 import { cn } from "@/lib/utils";
+import { useProModel } from "@/hooks/use-pro-model";
 
 const ConversationPage = () => {
+  const proModel = useProModel();
   const router = useRouter();
   const [messages, setMessages] = useState<
     OpenAI.Chat.Completions.ChatCompletionMessageParam[]
@@ -51,8 +53,9 @@ const ConversationPage = () => {
       setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
     } catch (error: any) {
-      console.log(error);
-      // TODO: Open Pro Model
+      if (error?.response?.status === 403) {
+        proModel.onOpen();
+      }
     } finally {
       router.refresh();
     }
