@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import prismadb from "@/lib/prismadb";
 import { stripe } from "@/lib/stripe";
 import { absoluteUrl } from "@/lib/utils";
-import { stringify } from "querystring";
 
 const settingsUrl = absoluteUrl("/settings");
 
@@ -18,7 +17,9 @@ export async function GET() {
     }
 
     const userSubscription = await prismadb.userSubscription.findUnique({
-      where: { userId },
+      where: {
+        userId,
+      },
     });
 
     if (userSubscription && userSubscription.stripeCustomerId) {
@@ -30,10 +31,11 @@ export async function GET() {
       return new NextResponse(JSON.stringify({ url: stripeSession.url }));
     }
 
-    const stripSession = await stripe.checkout.sessions.create({
+    const stripeSession = await stripe.checkout.sessions.create({
       success_url: settingsUrl,
       cancel_url: settingsUrl,
       payment_method_types: ["card"],
+      mode: "subscription",
       billing_address_collection: "auto",
       customer_email: user.emailAddresses[0].emailAddress,
       line_items: [
@@ -57,9 +59,9 @@ export async function GET() {
       },
     });
 
-    return new NextResponse(JSON.stringify({ url: stripSession.url }));
+    return new NextResponse(JSON.stringify({ url: stripeSession.url }));
   } catch (error) {
     console.log("[STRIPE_ERROR]", error);
-    return new NextResponse("Internal error", { status: 500 });
+    return new NextResponse("Internal Error", { status: 500 });
   }
 }
