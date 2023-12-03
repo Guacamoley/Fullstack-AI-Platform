@@ -3,7 +3,7 @@
 ![Screenshot of webpage](public/screenshot.png)
 
 Welcome to the SaaS AI Platform, a powerful and versatile AI-driven solution for various creative tasks. This platform is built with cutting-edge technologies and provides a range of features to enhance your development experience.
-(Live deployment coming soon)
+(Live deployment for testing coming soon)
 
 ## Features
 
@@ -33,8 +33,9 @@ Welcome to the SaaS AI Platform, a powerful and versatile AI-driven solution for
 ### Additional Features
 
 - **Page Loading State:** Provides feedback to users during page loading.
-- **Stripe Monthly Subscription:** Integrates Stripe for secure and flexible monthly subscription management. (WIP)
+- **Stripe Monthly Subscription:** Integrates Stripe for secure and flexible monthly subscription management.
 - **Free Tier with API Limiting:** Offers a free tier with API limiting for different usage levels.
+- **Crisp Customer Support Chat :** Utilizes Crisp for efficient customer support.
 
 ### Backend Development
 
@@ -70,6 +71,8 @@ Welcome to the SaaS AI Platform, a powerful and versatile AI-driven solution for
 - Stripe
 - Zod
 - Zustand
+- Crisp
+- Toast
 
 ## Getting Started
 
