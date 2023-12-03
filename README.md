@@ -4,6 +4,7 @@
 
 Welcome to the SaaS AI Platform, a powerful and versatile AI-driven solution for various creative tasks. This platform is built with cutting-edge technologies and provides a range of features to enhance your development experience.
 (Live deployment coming soon)
+
 ## Features
 
 ### Design and Styling
@@ -26,6 +27,7 @@ Welcome to the SaaS AI Platform, a powerful and versatile AI-driven solution for
 - **Image Generation Tool:** Integrates OpenAI for advanced image generation.
 - **Video Generation Tool:** Utilizes Replicate AI for cutting-edge video generation.
 - **Conversation Generation Tool:** Implements OpenAI for natural language conversation generation.
+- **Code Generation Tool:** Utilizes OpenAI for innovative code generation snippets.
 - **Music Generation Tool:** Leverages Replicate AI for innovative music generation.
 
 ### Additional Features
