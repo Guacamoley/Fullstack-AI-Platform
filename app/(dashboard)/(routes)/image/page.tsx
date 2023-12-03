@@ -28,6 +28,7 @@ import { useState } from "react";
 import OpenAI from "openai";
 import { cn } from "@/lib/utils";
 import { useProModel } from "@/hooks/use-pro-model";
+import toast from "react-hot-toast";
 
 const PhotoPage = () => {
   const proModel = useProModel();
@@ -58,6 +59,8 @@ const PhotoPage = () => {
       console.log(error);
       if (error?.response?.status === 403) {
         proModel.onOpen();
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();

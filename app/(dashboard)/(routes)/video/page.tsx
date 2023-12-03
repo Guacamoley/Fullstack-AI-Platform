@@ -17,6 +17,7 @@ import { formSchema } from "./constants";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useProModel } from "@/hooks/use-pro-model";
+import toast from "react-hot-toast";
 
 const VideoPage = () => {
   const proModel = useProModel();
@@ -43,6 +44,8 @@ const VideoPage = () => {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModel.onOpen();
+      } else {
+        toast.error("Something went wrong");
       }
     } finally {
       router.refresh();
